@@ -1,0 +1,21 @@
+services:
+  ingredients-nlp-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src:ro
+      - ./scripts:/app/scripts:ro
+      # Prevent overwriting installed packages
+      - /app/.venv
+    environment:
+      - LOG_LEVEL=info
+      - PORT=3000
+      - DEV_USER_ID=dev-user-local
+      - ENABLE_DETAILED_LOGGING=false
+    env_file:
+      - .env
+    command: uvicorn scripts.dev_server:app --host 0.0.0.0 --port 3000 --reload
