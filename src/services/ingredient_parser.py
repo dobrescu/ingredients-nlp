@@ -54,15 +54,50 @@ class IngredientParserService:
             try:
                 parsed = parse_ingredient(ingredient_str)
 
+                # Helper to extract text and confidence from IngredientText objects
+                def extract_field(field):
+                    if field is None:
+                        return None, 0.0
+                    if hasattr(field, "text"):
+                        return field.text, field.confidence
+                    return str(field), 1.0
+
+                # Extract fields with confidence
+                name_text, name_conf = extract_field(parsed.name)
+                size_text, size_conf = extract_field(parsed.size) if hasattr(parsed, "size") else (None, 0.0)
+                prep_text, prep_conf = extract_field(parsed.preparation) if hasattr(parsed, "preparation") else (None, 0.0)
+                comment_text, comment_conf = extract_field(parsed.comment) if hasattr(parsed, "comment") else (None, 0.0)
+                purpose_text, purpose_conf = extract_field(parsed.purpose) if hasattr(parsed, "purpose") else (None, 0.0)
+
+                # Extract amount and unit
+                amount_text, amount_conf, unit_text, unit_conf = None, 0.0, None, 0.0
+                if parsed.amount and len(parsed.amount) > 0:
+                    first_amount = parsed.amount[0]
+                    if hasattr(first_amount, "quantity"):
+                        amount_text = str(first_amount.quantity)
+                        amount_conf = first_amount.quantity_confidence if hasattr(first_amount, "quantity_confidence") else 1.0
+                    if hasattr(first_amount, "unit"):
+                        unit_text, unit_conf = extract_field(first_amount.unit)
+
                 # Convert the parsed result to our typed dict format
                 result: ParsedIngredient = {
                     "sentence": ingredient_str,
-                    "name": parsed.name if parsed.name else "",
-                    "size": parsed.size if hasattr(parsed, "size") else None,
-                    "amount": str(parsed.amount) if parsed.amount else None,
-                    "unit": parsed.unit if parsed.unit else None,
-                    "comment": parsed.comment if hasattr(parsed, "comment") else None,
-                    "preparation": parsed.preparation if hasattr(parsed, "preparation") else None,
+                    "name": name_text or "",
+                    "size": size_text,
+                    "amount": amount_text,
+                    "unit": unit_text,
+                    "comment": comment_text,
+                    "preparation": prep_text,
+                    "purpose": purpose_text,
+                    "confidence": {
+                        "name": name_conf,
+                        "size": size_conf,
+                        "amount": amount_conf,
+                        "unit": unit_conf,
+                        "comment": comment_conf,
+                        "preparation": prep_conf,
+                        "purpose": purpose_conf,
+                    },
                 }
 
                 parsed_results.append(result)
@@ -86,6 +121,16 @@ class IngredientParserService:
                     "unit": None,
                     "comment": None,
                     "preparation": None,
+                    "purpose": None,
+                    "confidence": {
+                        "name": 0.0,
+                        "size": 0.0,
+                        "amount": 0.0,
+                        "unit": 0.0,
+                        "comment": 0.0,
+                        "preparation": 0.0,
+                        "purpose": 0.0,
+                    },
                 })
 
         logger.info(

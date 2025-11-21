@@ -12,7 +12,9 @@ class ParsedIngredient(TypedDict, total=False):
     unit: Optional[str]
     comment: Optional[str]
     preparation: Optional[str]
+    purpose: Optional[str]
     sentence: str
+    confidence: Dict[str, float]
 
 
 class ParseIngredientsRequest(TypedDict):
