@@ -1,0 +1,44 @@
+# Git and version control
+.git
+.gitignore
+.github
+
+# Dependencies (yarn cache - not needed, installed during build)
+.yarn/cache
+.yarn/install-state.gz
+
+# Build output (generated during build)
+dist
+
+# Testing
+test
+coverage
+
+# Documentation
+*.md
+!README.md
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+output.log
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+
+# CI/CD
+buildspec.yml

@@ -1,0 +1,50 @@
+{
+  "name": "chef",
+  "packageManager": "yarn@4.8.1",
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "start": "sam local start-api --warm-containers EAGER",
+    "start:dev": "npx tsx watch ./scripts/dev-server.ts",
+    "docker:build": "docker build -t chef-lambda .",
+    "docker:run": "docker run -p 3000:8080 chef-lambda",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up --build",
+    "docker:build-and-deploy": "dotenv -- bash ./scripts/ecr-build-push.sh",
+    "test": "vitest run",
+    "test:unit": "vitest run src/**/*.test.ts",
+    "test:integration": "vitest run tests/integration/**/*.test.ts",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.782.0",
+    "@aws-sdk/client-dynamodb": "^3.895.0",
+    "@aws-sdk/client-s3": "^3.895.0",
+    "@aws-sdk/lib-dynamodb": "^3.895.0",
+    "canonical-json": "^0.2.0",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "mdast-util-to-string": "^4.0.0",
+    "path-to-regexp": "^8.3.0",
+    "remark-parse": "^11.0.0",
+    "tsx": "^4.19.3",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@smithy/util-stream": "^3.3.2",
+    "@types/aws-lambda": "^8.10.152",
+    "@types/node": "^22.13.14",
+    "@vitest/ui": "^4.0.10",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk-client-mock": "^4.1.0",
+    "dotenv-cli": "^10.0.0",
+    "esbuild": "^0.25.11",
+    "esbuild-node-loader": "^0.8.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "vitest": "^4.0.10"
+  }
+}

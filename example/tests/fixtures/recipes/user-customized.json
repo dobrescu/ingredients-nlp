@@ -1,0 +1,13 @@
+{
+  "PK": "user#test-user-123",
+  "SK": "recipe#abc123def456",
+  "urlHash": "abc123def456",
+  "originalUrl": "https://example.com/chocolate-chip-cookies",
+  "createdAt": "2025-01-20T00:00:00.000Z",
+  "lastModified": "2025-01-20T02:00:00.000Z",
+  "schemaVersion": "1.0.0",
+  "fields": {
+    "name": "{\"value\":\"My Favorite Chocolate Chip Cookies\",\"rendered\":{\"type\":\"markdown\",\"value\":\"My Favorite Chocolate Chip Cookies\",\"version\":\"1.0.0\"},\"currentHash\":\"hash-name-002\",\"baseHash\":\"hash-name-001\",\"history\":[{\"timestamp\":\"2025-01-20T00:00:00.000Z\",\"hash\":\"hash-name-001\",\"source\":\"prepper\",\"actor\":\"system\",\"summary\":\"Initial ingestion from recipe webpage\"},{\"timestamp\":\"2025-01-20T02:00:00.000Z\",\"hash\":\"hash-name-002\",\"source\":\"user\",\"actor\":\"test-user-123\",\"summary\":\"Updated via Kassi client\"}]}",
+    "description": "{\"value\":\"My customized version of the classic chocolate chip cookie recipe. I added extra vanilla and use brown butter for a richer flavor.\",\"rendered\":{\"type\":\"markdown\",\"value\":\"My customized version of the classic chocolate chip cookie recipe. I added extra vanilla and use brown butter for a richer flavor.\",\"version\":\"1.0.0\"},\"currentHash\":\"hash-desc-002\",\"baseHash\":\"hash-desc-001\",\"history\":[{\"timestamp\":\"2025-01-20T00:00:00.000Z\",\"hash\":\"hash-desc-001\",\"source\":\"prepper\",\"actor\":\"system\",\"summary\":\"Initial ingestion from recipe webpage\"},{\"timestamp\":\"2025-01-20T02:00:00.000Z\",\"hash\":\"hash-desc-002\",\"source\":\"user\",\"actor\":\"test-user-123\",\"summary\":\"Updated via Kassi client\"}]}"
+  }
+}

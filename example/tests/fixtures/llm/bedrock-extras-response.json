@@ -1,0 +1,18 @@
+{
+  "id": "msg_01XYZ789",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"extras\":{\"recipeYield\":\"24 cookies\",\"totalTime\":\"PT45M\",\"keywords\":[\"cookies\",\"dessert\",\"chocolate chip\",\"baking\"]}}"
+    }
+  ],
+  "model": "claude-3-5-sonnet-20241022",
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 450,
+    "output_tokens": 60
+  }
+}

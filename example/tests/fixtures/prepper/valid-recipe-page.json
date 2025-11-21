@@ -1,0 +1,158 @@
+{
+  "url": "https://example.com/chocolate-chip-cookies",
+  "fragments": {
+    "name": {
+      "fragment": "<d>Classic Chocolate Chip Cookies</d>",
+      "score": 1
+    },
+    "description": {
+      "fragment": "<p>The best homemade <b>chocolate chip cookies</b> with a crispy edge and chewy center.</p>",
+      "score": 1
+    },
+    "ingredients": {
+      "fragment": "<c><f>Dry Ingredients</f><k><h>2 1/4 cups all-purpose flour</h><h>1 tsp baking soda</h><h>1 tsp salt</h></k><f>Wet Ingredients</f><k><h>1 cup butter, softened</h><h>3/4 cup granulated sugar</h><h>3/4 cup packed brown sugar</h><h>2 large eggs</h><h>2 tsp vanilla extract</h><h>2 cups chocolate chips</h></k></c>",
+      "score": 1
+    },
+    "instructions": {
+      "fragment": "<c><f>Preparation:</f><j><h>Preheat oven to 375°F (190°C).</h><h>Combine flour, baking soda and salt in small bowl.</h><h>Beat butter, granulated sugar, and brown sugar in large mixer bowl until creamy.</h><h>Add eggs and vanilla extract; beat well.</h><h>Gradually beat in flour mixture.</h><h>Stir in chocolate chips.</h><h>Drop by rounded tablespoon onto ungreased baking sheets.</h><h>Bake for 9 to 11 minutes or until golden brown.</h><h>Cool on baking sheets for 2 minutes; remove to wire racks to cool completely.</h></j></c>",
+      "score": 1
+    },
+    "nutrition": {
+      "fragment": "<k><h>Serving Size:1 Cookie</h><h>Calories:140</h><h>Sugar:12 g</h><h>Sodium:95 mg</h><h>Fat:7 g</h><h>Carbohydrates:18 g</h><h>Protein:2 g</h><h>Cholesterol:15 mg</h></k>",
+      "score": 0.9
+    },
+    "raw": {
+      "fragment": "<c><g><c><img width=\"280\" height=\"280\" src=\"https://example.com/cookies.jpg\"/></c><c><ph data-fragment-ref=\"name\"/><c><c><c>4.9 from 523 reviews</c></c></c><c><k><h>Author:Chef Example</h><h>Prep Time:15 minutes</h><h>Cook Time:11 minutes</h><h>Total Time:26 minutes</h><h>Yield:48 cookies</h><h>Category:Dessert</h><h>Method:Baking</h><h>Cuisine:American</h></k></c></c></g><c><c><e>Description</e><c><ph data-fragment-ref=\"description\"/></c></c><c><c><c><e>Ingredients</e></c><c>Scale 1x 2x 3x</c></c><ph data-fragment-ref=\"ingredients\"/></c><c><c><e>Instructions</e></c><c><ph data-fragment-ref=\"instructions\"/></c></c><c><e>Nutrition</e><ph data-fragment-ref=\"nutrition\"/></c></c></c>",
+      "relevanceScore": -1,
+      "jsonLdScore": 0.95
+    }
+  },
+  "recipes": [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Recipe",
+      "name": "Classic Chocolate Chip Cookies",
+      "description": "The best homemade chocolate chip cookies with a crispy edge and chewy center.",
+      "author": {
+        "@type": "Person",
+        "name": "Chef Example"
+      },
+      "keywords": "cookies, chocolate chip, dessert, baking",
+      "image": {
+        "@type": "ImageObject",
+        "@context": "https://schema.org",
+        "primaryContentUrl": "https://example.com/cookies.jpg",
+        "additionalContentUrl": [
+          "https://example.com/cookies-large.jpg"
+        ]
+      },
+      "url": "https://example.com/chocolate-chip-cookies",
+      "recipeIngredient": [
+        "2 1/4 cups all-purpose flour",
+        "1 tsp baking soda",
+        "1 tsp salt",
+        "1 cup butter, softened",
+        "3/4 cup granulated sugar",
+        "3/4 cup packed brown sugar",
+        "2 large eggs",
+        "2 tsp vanilla extract",
+        "2 cups chocolate chips"
+      ],
+      "recipeInstructions": [
+        {
+          "@type": "HowToStep",
+          "text": "Preheat oven to 375°F (190°C).",
+          "url": "https://example.com/chocolate-chip-cookies#step-1"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Combine flour, baking soda and salt in small bowl.",
+          "url": "https://example.com/chocolate-chip-cookies#step-2"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Beat butter, granulated sugar, and brown sugar in large mixer bowl until creamy.",
+          "url": "https://example.com/chocolate-chip-cookies#step-3"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Add eggs and vanilla extract; beat well.",
+          "url": "https://example.com/chocolate-chip-cookies#step-4"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Gradually beat in flour mixture.",
+          "url": "https://example.com/chocolate-chip-cookies#step-5"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Stir in chocolate chips.",
+          "url": "https://example.com/chocolate-chip-cookies#step-6"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Drop by rounded tablespoon onto ungreased baking sheets.",
+          "url": "https://example.com/chocolate-chip-cookies#step-7"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Bake for 9 to 11 minutes or until golden brown.",
+          "url": "https://example.com/chocolate-chip-cookies#step-8"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Cool on baking sheets for 2 minutes; remove to wire racks to cool completely.",
+          "url": "https://example.com/chocolate-chip-cookies#step-9"
+        }
+      ],
+      "prepTime": "PT15M",
+      "cookTime": "PT11M",
+      "totalTime": "PT26M",
+      "recipeYield": [
+        "48",
+        "48 cookies"
+      ],
+      "recipeCategory": [
+        "Dessert"
+      ],
+      "cookingMethod": "Baking",
+      "recipeCuisine": [
+        "American"
+      ],
+      "nutrition": {
+        "servingSize": "1",
+        "calories": "140 kcal",
+        "sugarContent": "12 g",
+        "sodiumContent": "95 mg",
+        "fatContent": "7 g",
+        "carbohydrateContent": "18 g",
+        "proteinContent": "2 g",
+        "cholesterolContent": "15 mg",
+        "@type": "nutritionInformation"
+      },
+      "datePublished": "2025-01-01T00:00:00+00:00",
+      "@id": "https://example.com/chocolate-chip-cookies#recipe",
+      "isPartOf": {
+        "@id": "https://example.com/chocolate-chip-cookies#article"
+      },
+      "mainEntityOfPage": "https://example.com/chocolate-chip-cookies"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "minify",
+      "data": {
+        "div": "c",
+        "h2": "d",
+        "h3": "e",
+        "h4": "f",
+        "header": "g",
+        "li": "h",
+        "ol": "j",
+        "ul": "k",
+        "p": "p",
+        "b": "b"
+      }
+    }
+  ]
+}

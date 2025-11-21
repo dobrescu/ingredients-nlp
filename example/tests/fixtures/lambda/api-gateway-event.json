@@ -1,0 +1,46 @@
+{
+  "version": "2.0",
+  "routeKey": "GET /recipe/{urlHash}",
+  "rawPath": "/recipe/abc123",
+  "rawQueryString": "",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "host": "api.example.com",
+    "user-agent": "Mozilla/5.0",
+    "x-forwarded-for": "1.2.3.4",
+    "x-forwarded-port": "443",
+    "x-forwarded-proto": "https"
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "apiId": "api123",
+    "domainName": "api.example.com",
+    "domainPrefix": "api",
+    "http": {
+      "method": "GET",
+      "path": "/recipe/abc123",
+      "protocol": "HTTP/1.1",
+      "sourceIp": "1.2.3.4",
+      "userAgent": "Mozilla/5.0"
+    },
+    "requestId": "req123",
+    "routeKey": "GET /recipe/{urlHash}",
+    "stage": "$default",
+    "time": "01/Jan/2025:00:00:00 +0000",
+    "timeEpoch": 1704067200000,
+    "authorizer": {
+      "jwt": {
+        "claims": {
+          "sub": "user123",
+          "email": "user@example.com"
+        },
+        "scopes": []
+      }
+    }
+  },
+  "pathParameters": {
+    "urlHash": "abc123"
+  },
+  "isBase64Encoded": false
+}

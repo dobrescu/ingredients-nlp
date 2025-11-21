@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv:*)",
+      "Bash(tree:*)",
+      "Bash(cat:*)",
+      "Bash(yarn add:*)",
+      "Bash(export PATH=\"/home/danutz/.nvm/versions/node/v22.14.0/bin:$PATH\")",
+      "Bash(yarn test)",
+      "Bash(yarn build)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(yarn test:integration:*)",
+      "Bash(yarn test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "urlHash": "abc123def456",
+  "originalUrl": "https://example.com/chocolate-chip-cookies",
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "lastModified": "2025-01-01T00:00:00.000Z",
+  "schemaVersion": "1.0.0",
+  "name": {
+    "value": "Classic Chocolate Chip Cookies",
+    "rendered": {
+      "type": "markdown",
+      "value": "Classic Chocolate Chip Cookies",
+      "version": "1.0.0"
+    },
+    "currentHash": "hash_name_001",
+    "baseHash": "hash_name_001",
+    "history": [
+      {
+        "timestamp": "2025-01-01T00:00:00.000Z",
+        "hash": "hash_name_001",
+        "source": "prepper",
+        "actor": "system",
+        "summary": "Initial ingestion from recipe webpage"
+      }
+    ]
+  },
+  "description": {
+    "value": "The best homemade chocolate chip cookies with a crispy edge and chewy center.",
+    "rendered": {
+      "type": "markdown",
+      "value": "The best homemade chocolate chip cookies with a crispy edge and chewy center.",
+      "version": "1.0.0"
+    },
+    "currentHash": "hash_desc_001",
+    "baseHash": "hash_desc_001",
+    "history": [
+      {
+        "timestamp": "2025-01-01T00:00:00.000Z",
+        "hash": "hash_desc_001",
+        "source": "prepper",
+        "actor": "system",
+        "summary": "Initial ingestion from recipe webpage"
+      }
+    ]
+  },
+  "recipeIngredient": {
+    "value": [
+      "2 1/4 cups all-purpose flour",
+      "1 tsp baking soda",
+      "1 cup butter, softened",
+      "2 cups chocolate chips"
+    ],
+    "rendered": {
+      "type": "markdown",
+      "value": "- 2 1/4 cups all-purpose flour\n- 1 tsp baking soda\n- 1 cup butter, softened\n- 2 cups chocolate chips",
+      "version": "1.0.0"
+    },
+    "currentHash": "hash_ingr_001",
+    "baseHash": "hash_ingr_001",
+    "history": [
+      {
+        "timestamp": "2025-01-01T00:00:00.000Z",
+        "hash": "hash_ingr_001",
+        "source": "prepper",
+        "actor": "system",
+        "summary": "Initial ingestion from recipe webpage"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+services:
+  chef-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    networks:
+      - kitchen
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src:ro
+      - ./scripts/dev-server.ts:/app/scripts/dev-server.ts:ro
+      # Prevent overwriting node_modules
+      - /app/node_modules
+      - ~/.aws:/root/.aws:ro
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=info
+      - PORT=3000
+      - PREPPER_URL=http://prepper-dev:9000
+    command: npx tsx watch ./scripts/dev-server.ts
+    env_file:
+      - .env
+
+networks:
+  kitchen:
+    external: true
