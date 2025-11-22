@@ -2,8 +2,8 @@
 FROM public.ecr.aws/lambda/python:3.12
 
 # Install production dependencies only (no cache, no build tools)
-COPY requirements-prod.txt .
-RUN pip install --no-cache-dir -r requirements-prod.txt && rm requirements-prod.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 
 # Copy application code
 COPY src/ ${LAMBDA_TASK_ROOT}/src/

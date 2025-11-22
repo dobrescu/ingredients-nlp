@@ -8,7 +8,7 @@ help:
 	@echo 'make format   - Format code'
 
 install:
-	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 
 dev:
 	python scripts/dev_server.py

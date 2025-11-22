@@ -1,0 +1,20 @@
+# Include production dependencies
+-r requirements.txt
+
+# Dev server
+fastapi
+uvicorn[standard]
+python-dotenv
+
+# Testing
+pytest
+pytest-cov
+pytest-asyncio
+pytest-mock
+
+# Code quality
+black
+ruff
+mypy
+boto3-stubs
+types-requests

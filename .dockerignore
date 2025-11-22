@@ -48,7 +48,6 @@ scripts/
 .env
 .env.*
 pyproject.toml
-requirements.txt
 requirements-dev.txt
 
 # Other
