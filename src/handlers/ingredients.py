@@ -1,6 +1,6 @@
 """Ingredient parsing handlers."""
 
-from typing import Any, Dict
+from typing import Any
 
 from src.middleware.request import parse_body
 from src.middleware.response import json_response
@@ -9,7 +9,7 @@ from src.types import ErrorResponse, ParseIngredientsRequest, ParseIngredientsRe
 from src.utils.logger import logger
 
 
-def handle_parse_ingredients(event: Dict[str, Any]) -> Dict[str, Any]:
+def handle_parse_ingredients(event: dict[str, Any]) -> dict[str, Any]:
     """
     Handle POST /parse endpoint - parse a list of ingredients.
 

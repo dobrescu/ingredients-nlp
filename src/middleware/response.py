@@ -1,12 +1,12 @@
 """Response helper utilities."""
 
 import json
-from typing import Any, Dict, Optional
+from typing import Any
 
 
 def json_response(
-    status_code: int, body: Any, headers: Optional[Dict[str, str]] = None
-) -> Dict[str, Any]:
+    status_code: int, body: Any, headers: dict[str, str] | None = None
+) -> dict[str, Any]:
     """
     Create a JSON response for AWS Lambda.
 
@@ -35,7 +35,7 @@ def json_response(
     }
 
 
-def cors_preflight_response() -> Dict[str, Any]:
+def cors_preflight_response() -> dict[str, Any]:
     """Return CORS preflight response for OPTIONS requests."""
     return {
         "statusCode": 200,

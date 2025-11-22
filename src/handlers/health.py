@@ -1,13 +1,13 @@
 """Health check handler."""
 
-from typing import Dict, Any
+from typing import Any
 
 from src import __version__
 from src.middleware.response import json_response
 from src.types import HealthResponse
 
 
-def handle_health() -> Dict[str, Any]:
+def handle_health() -> dict[str, Any]:
     """
     Handle health check requests.
 

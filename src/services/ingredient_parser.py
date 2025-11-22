@@ -1,7 +1,5 @@
 """Ingredient parsing service using ingredient-parser library."""
 
-from typing import List
-
 from ingredient_parser import parse_ingredient
 
 from src.types import ParsedIngredient
@@ -15,7 +13,7 @@ class IngredientParserService:
         """Initialize the ingredient parser service."""
         logger.info("IngredientParserService initialized")
 
-    def parse_ingredients(self, ingredients: List[str]) -> List[ParsedIngredient]:
+    def parse_ingredients(self, ingredients: list[str]) -> list[ParsedIngredient]:
         """
         Parse a list of ingredient strings into structured data.
 
@@ -37,7 +35,7 @@ class IngredientParserService:
 
         logger.info("Parsing ingredients", {"count": len(ingredients)})
 
-        parsed_results: List[ParsedIngredient] = []
+        parsed_results: list[ParsedIngredient] = []
 
         for idx, ingredient_str in enumerate(ingredients):
             if not isinstance(ingredient_str, str):

@@ -3,7 +3,7 @@
 import json
 import logging
 import sys
-from typing import Any, Dict, Optional
+from typing import Any
 
 from src.env import config
 
@@ -34,7 +34,7 @@ class StructuredLogger:
         self.logger.addHandler(handler)
 
     def _log(
-        self, level: str, message: str, context: Optional[Dict[str, Any]] = None
+        self, level: str, message: str, context: dict[str, Any] | None = None
     ) -> None:
         """Internal logging method with context."""
         if context:
@@ -46,9 +46,9 @@ class StructuredLogger:
 
         getattr(self.logger, level)(log_message)
 
-    def _sanitize_context(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    def _sanitize_context(self, context: dict[str, Any]) -> dict[str, Any]:
         """Sanitize context for JSON serialization."""
-        sanitized: Dict[str, Any] = {}
+        sanitized: dict[str, Any] = {}
         for key, value in context.items():
             if isinstance(value, (str, int, float, bool, type(None))):
                 sanitized[key] = value
@@ -65,19 +65,19 @@ class StructuredLogger:
                 sanitized[key] = str(value)
         return sanitized
 
-    def info(self, message: str, context: Optional[Dict[str, Any]] = None) -> None:
+    def info(self, message: str, context: dict[str, Any] | None = None) -> None:
         """Log info message."""
         self._log("info", message, context)
 
-    def warning(self, message: str, context: Optional[Dict[str, Any]] = None) -> None:
+    def warning(self, message: str, context: dict[str, Any] | None = None) -> None:
         """Log warning message."""
         self._log("warning", message, context)
 
-    def error(self, message: str, context: Optional[Dict[str, Any]] = None) -> None:
+    def error(self, message: str, context: dict[str, Any] | None = None) -> None:
         """Log error message."""
         self._log("error", message, context)
 
-    def debug(self, message: str, context: Optional[Dict[str, Any]] = None) -> None:
+    def debug(self, message: str, context: dict[str, Any] | None = None) -> None:
         """Log debug message."""
         self._log("debug", message, context)
 

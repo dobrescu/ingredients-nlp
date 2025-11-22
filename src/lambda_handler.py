@@ -4,7 +4,7 @@ Lambda Handler - RESTful API Router
 Simple routing for ingredient parsing endpoints.
 """
 
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable
 
 from src.handlers.health import handle_health
 from src.handlers.ingredients import handle_parse_ingredients
@@ -13,7 +13,7 @@ from src.types import ErrorResponse
 from src.utils.logger import logger
 
 # Type alias for route handlers
-RouteHandler = Callable[[Dict[str, Any]], Dict[str, Any]]
+RouteHandler = Callable[[dict[str, Any]], dict[str, Any]]
 
 
 class Route:
@@ -24,7 +24,7 @@ class Route:
         self.path = path
         self.handler = handler
 
-    def matches(self, method: str, path: str) -> Tuple[bool, Optional[Dict[str, str]]]:
+    def matches(self, method: str, path: str) -> tuple[bool, dict[str, str] | None]:
         """
         Check if this route matches the given method and path.
 
@@ -50,7 +50,7 @@ class Route:
             if len(pattern_parts) != len(path_parts):
                 return False, None
 
-            params: Dict[str, str] = {}
+            params: dict[str, str] = {}
             for pattern_part, path_part in zip(pattern_parts, path_parts):
                 if pattern_part.startswith(":"):
                     param_name = pattern_part[1:]
@@ -64,13 +64,13 @@ class Route:
 
 
 # Define application routes
-routes: List[Route] = [
+routes: list[Route] = [
     Route("GET", "/health", lambda _: handle_health()),
     Route("POST", "/parse", handle_parse_ingredients),
 ]
 
 
-def handler(event: Dict[str, Any], context: Any = None) -> Dict[str, Any]:
+def handler(event: dict[str, Any], context: Any = None) -> dict[str, Any]:
     """
     Main Lambda handler with routing.
 

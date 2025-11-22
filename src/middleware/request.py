@@ -1,14 +1,12 @@
 """Request parsing utilities."""
 
 import json
-from typing import Any, Dict, Optional, TypeVar
+from typing import Any
 
 from src.utils.logger import logger
 
-T = TypeVar("T")
 
-
-def parse_body(event: Dict[str, Any], expected_type: Optional[type] = None) -> Optional[Dict[str, Any]]:
+def parse_body(event: dict[str, Any], expected_type: type | None = None) -> dict[str, Any] | None:
     """
     Parse JSON body from Lambda event.
 
@@ -39,7 +37,7 @@ def parse_body(event: Dict[str, Any], expected_type: Optional[type] = None) -> O
         return None
 
 
-def get_path_param(event: Dict[str, Any], param_name: str) -> Optional[str]:
+def get_path_param(event: dict[str, Any], param_name: str) -> str | None:
     """
     Extract path parameter from Lambda event.
 
@@ -57,7 +55,7 @@ def get_path_param(event: Dict[str, Any], param_name: str) -> Optional[str]:
     return path_params.get(param_name)
 
 
-def get_query_param(event: Dict[str, Any], param_name: str) -> Optional[str]:
+def get_query_param(event: dict[str, Any], param_name: str) -> str | None:
     """
     Extract query parameter from Lambda event.
 
