@@ -23,7 +23,7 @@ def handle_parse_ingredients(event: Dict[str, Any]) -> Dict[str, Any]:
 
     # Parse and validate request body
     body = parse_body(event)
-    if not body:
+    if body is None:
         error: ErrorResponse = {
             "error": "Request body is required",
             "code": "MISSING_BODY",
@@ -32,7 +32,7 @@ def handle_parse_ingredients(event: Dict[str, Any]) -> Dict[str, Any]:
         return json_response(400, error)
 
     ingredients = body.get("ingredients")
-    if not ingredients:
+    if ingredients is None:
         error = {
             "error": "Missing required field: ingredients",
             "code": "MISSING_INGREDIENTS",

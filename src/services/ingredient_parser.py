@@ -52,12 +52,16 @@ class IngredientParserService:
                 continue
 
             try:
-                parsed = parse_ingredient(ingredient_str)
+                # Parse with foundation_foods enabled to get USDA matches
+                parsed = parse_ingredient(ingredient_str, foundation_foods=True)
 
                 # Helper to extract text and confidence from IngredientText objects
                 def extract_field(field):
                     if field is None:
                         return None, 0.0
+                    # Handle list of IngredientText objects (for name field)
+                    if isinstance(field, list) and len(field) > 0:
+                        return field[0].text, field[0].confidence
                     if hasattr(field, "text"):
                         return field.text, field.confidence
                     return str(field), 1.0
@@ -69,15 +73,37 @@ class IngredientParserService:
                 comment_text, comment_conf = extract_field(parsed.comment) if hasattr(parsed, "comment") else (None, 0.0)
                 purpose_text, purpose_conf = extract_field(parsed.purpose) if hasattr(parsed, "purpose") else (None, 0.0)
 
-                # Extract amount and unit
-                amount_text, amount_conf, unit_text, unit_conf = None, 0.0, None, 0.0
+                # Extract amount, unit, and flags
+                amount_text, amount_max_text, amount_conf, unit_text, unit_conf = None, None, 0.0, None, 0.0
+                is_range, is_approximate, is_singular = False, False, False
+
                 if parsed.amount and len(parsed.amount) > 0:
                     first_amount = parsed.amount[0]
                     if hasattr(first_amount, "quantity"):
-                        amount_text = str(first_amount.quantity)
-                        amount_conf = first_amount.quantity_confidence if hasattr(first_amount, "quantity_confidence") else 1.0
+                        # Convert Fraction to float for consistent formatting
+                        amount_text = str(float(first_amount.quantity))
+                        amount_conf = first_amount.confidence if hasattr(first_amount, "confidence") else 1.0
+                    if hasattr(first_amount, "quantity_max"):
+                        amount_max_text = str(float(first_amount.quantity_max))
                     if hasattr(first_amount, "unit"):
                         unit_text, unit_conf = extract_field(first_amount.unit)
+                    # Extract boolean flags
+                    is_range = first_amount.RANGE if hasattr(first_amount, "RANGE") else False
+                    is_approximate = first_amount.APPROXIMATE if hasattr(first_amount, "APPROXIMATE") else False
+                    is_singular = first_amount.SINGULAR if hasattr(first_amount, "SINGULAR") else False
+
+                # Extract foundation foods
+                foundation_foods = []
+                if parsed.foundation_foods:
+                    for ff in parsed.foundation_foods:
+                        foundation_foods.append({
+                            "text": ff.text,
+                            "confidence": ff.confidence,
+                            "fdc_id": ff.fdc_id,
+                            "category": ff.category,
+                            "data_type": ff.data_type,
+                            "url": ff.url,
+                        })
 
                 # Convert the parsed result to our typed dict format
                 result: ParsedIngredient = {
@@ -85,10 +111,14 @@ class IngredientParserService:
                     "name": name_text or "",
                     "size": size_text,
                     "amount": amount_text,
+                    "amount_max": amount_max_text,
                     "unit": unit_text,
                     "comment": comment_text,
                     "preparation": prep_text,
                     "purpose": purpose_text,
+                    "is_range": is_range,
+                    "is_approximate": is_approximate,
+                    "is_singular": is_singular,
                     "confidence": {
                         "name": name_conf,
                         "size": size_conf,
@@ -98,6 +128,7 @@ class IngredientParserService:
                         "preparation": prep_conf,
                         "purpose": purpose_conf,
                     },
+                    "foundation_foods": foundation_foods,
                 }
 
                 parsed_results.append(result)
@@ -118,10 +149,14 @@ class IngredientParserService:
                     "name": ingredient_str,  # Fallback to full string
                     "size": None,
                     "amount": None,
+                    "amount_max": None,
                     "unit": None,
                     "comment": None,
                     "preparation": None,
                     "purpose": None,
+                    "is_range": False,
+                    "is_approximate": False,
+                    "is_singular": False,
                     "confidence": {
                         "name": 0.0,
                         "size": 0.0,
@@ -131,6 +166,7 @@ class IngredientParserService:
                         "preparation": 0.0,
                         "purpose": 0.0,
                     },
+                    "foundation_foods": [],
                 })
 
         logger.info(
