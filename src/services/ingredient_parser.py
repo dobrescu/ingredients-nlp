@@ -68,10 +68,10 @@ class IngredientParserService:
 
                 # Extract fields with confidence
                 name_text, name_conf = extract_field(parsed.name)
-                size_text, size_conf = extract_field(parsed.size) if hasattr(parsed, "size") else (None, 0.0)
-                prep_text, prep_conf = extract_field(parsed.preparation) if hasattr(parsed, "preparation") else (None, 0.0)
-                comment_text, comment_conf = extract_field(parsed.comment) if hasattr(parsed, "comment") else (None, 0.0)
-                purpose_text, purpose_conf = extract_field(parsed.purpose) if hasattr(parsed, "purpose") else (None, 0.0)
+                size_text, size_conf = extract_field(getattr(parsed, "size", None))
+                prep_text, prep_conf = extract_field(getattr(parsed, "preparation", None))
+                comment_text, comment_conf = extract_field(getattr(parsed, "comment", None))
+                purpose_text, purpose_conf = extract_field(getattr(parsed, "purpose", None))
 
                 # Extract amount, unit, and flags
                 amount_text, amount_max_text, amount_conf, unit_text, unit_conf = None, None, 0.0, None, 0.0
@@ -79,31 +79,31 @@ class IngredientParserService:
 
                 if parsed.amount and len(parsed.amount) > 0:
                     first_amount = parsed.amount[0]
-                    if hasattr(first_amount, "quantity"):
-                        # Convert Fraction to float for consistent formatting
+                    # Convert Fraction to float for consistent formatting
+                    if getattr(first_amount, "quantity", None) is not None:
                         amount_text = str(float(first_amount.quantity))
-                        amount_conf = first_amount.confidence if hasattr(first_amount, "confidence") else 1.0
-                    if hasattr(first_amount, "quantity_max"):
+                        amount_conf = getattr(first_amount, "confidence", 1.0)
+                    if getattr(first_amount, "quantity_max", None) is not None:
                         amount_max_text = str(float(first_amount.quantity_max))
-                    if hasattr(first_amount, "unit"):
+                    if getattr(first_amount, "unit", None) is not None:
                         unit_text, unit_conf = extract_field(first_amount.unit)
                     # Extract boolean flags
-                    is_range = first_amount.RANGE if hasattr(first_amount, "RANGE") else False
-                    is_approximate = first_amount.APPROXIMATE if hasattr(first_amount, "APPROXIMATE") else False
-                    is_singular = first_amount.SINGULAR if hasattr(first_amount, "SINGULAR") else False
+                    is_range = getattr(first_amount, "RANGE", False)
+                    is_approximate = getattr(first_amount, "APPROXIMATE", False)
+                    is_singular = getattr(first_amount, "SINGULAR", False)
 
                 # Extract foundation foods
-                foundation_foods = []
-                if parsed.foundation_foods:
-                    for ff in parsed.foundation_foods:
-                        foundation_foods.append({
-                            "text": ff.text,
-                            "confidence": ff.confidence,
-                            "fdc_id": ff.fdc_id,
-                            "category": ff.category,
-                            "data_type": ff.data_type,
-                            "url": ff.url,
-                        })
+                foundation_foods = [
+                    {
+                        "text": ff.text,
+                        "confidence": ff.confidence,
+                        "fdc_id": ff.fdc_id,
+                        "category": ff.category,
+                        "data_type": ff.data_type,
+                        "url": ff.url,
+                    }
+                    for ff in parsed.foundation_foods
+                ] if parsed.foundation_foods else []
 
                 # Convert the parsed result to our typed dict format
                 result: ParsedIngredient = {

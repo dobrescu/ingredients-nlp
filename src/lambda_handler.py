@@ -112,7 +112,6 @@ def handler(event: Dict[str, Any], context: Any = None) -> Dict[str, Any]:
 
         # Check if path exists with different method (405)
         for route in routes:
-            _, _ = route.matches("*", path)  # Check path only
             if route.path == path:
                 error: ErrorResponse = {
                     "error": "Method Not Allowed",

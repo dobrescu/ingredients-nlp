@@ -1,9 +1,9 @@
 # Production Dockerfile for AWS Lambda
 FROM public.ecr.aws/lambda/python:3.12
 
-# Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install production dependencies only (no cache, no build tools)
+COPY requirements-prod.txt .
+RUN pip install --no-cache-dir -r requirements-prod.txt && rm requirements-prod.txt
 
 # Copy application code
 COPY src/ ${LAMBDA_TASK_ROOT}/src/

@@ -1,0 +1,58 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+dist
+build
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# Virtual environments
+venv
+env
+.venv
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Tests
+tests/
+test_*.py
+*_test.py
+
+# Documentation
+*.md
+docs/
+
+# CI/CD
+.github/
+
+# Claude
+.claude/
+
+# Scripts
+scripts/
+
+# Config files
+.env
+.env.*
+pyproject.toml
+requirements.txt
+requirements-dev.txt
+
+# Other
+*.log
+.DS_Store
+Dockerfile
+docker-compose.yml
