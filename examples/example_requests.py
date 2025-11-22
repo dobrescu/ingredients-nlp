@@ -25,9 +25,19 @@ def main():
     result = response.json()
     print(f"\nParsed {result['count']} ingredients:")
     for item in result["parsed"]:
-        print(f"  {item['amount']} {item['unit']} {item['name']}")
+        # Format amount and unit
+        amount = item.get("amount", "")
+        unit = item.get("unit", "")
+        name = item.get("name", "")
+        parts = [p for p in [amount, unit, name] if p]
+        print(f"  {' '.join(parts)}")
+
+        # Show additional details
         if item.get("preparation"):
-            print(f"    → {item['preparation']}")
+            print(f"    → Preparation: {item['preparation']}")
+        if item.get("foundation_foods"):
+            ff = item["foundation_foods"][0]
+            print(f"    → USDA: {ff['text']} (FDC: {ff['fdc_id']})")
 
 
 if __name__ == "__main__":

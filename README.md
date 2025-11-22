@@ -27,18 +27,26 @@ POST /parse
 }
 ```
 
-Response:
+Response shows parsed ingredients with amounts, units, confidence scores, and USDA nutritional data:
 ```json
 {
   "parsed": [
     {
+      "sentence": "2 cups flour",
       "name": "flour",
       "amount": "2.0",
       "unit": "cup",
-      "sentence": "2 cups flour"
+      "is_range": false,
+      "is_approximate": false,
+      "confidence": { "name": 0.99, "amount": 1.0 },
+      "foundation_foods": [{
+        "text": "Flour, white, all-purpose",
+        "fdc_id": 169736,
+        "url": "https://fdc.nal.usda.gov/food-details/169736/nutrients"
+      }]
     }
   ],
-  "count": 2
+  "count": 1
 }
 ```
 

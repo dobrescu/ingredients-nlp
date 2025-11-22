@@ -10,15 +10,19 @@ description: Patterns for Python Lambda handlers and ingredient parsing service
 ```python
 def handle_parse_ingredients(event: Dict[str, Any]) -> Dict[str, Any]:
     body = parse_body(event)
-    if not body or not body.get("ingredients"):
-        return json_response(400, {"error": "Missing ingredients"})
+    if body is None:
+        return json_response(400, {"error": "Missing body", "code": "MISSING_BODY"})
+
+    ingredients = body.get("ingredients")
+    if ingredients is None:
+        return json_response(400, {"error": "Missing ingredients", "code": "MISSING_INGREDIENTS"})
 
     try:
-        parsed = ingredient_parser_service.parse_ingredients(body["ingredients"])
-        return json_response(200, {"parsed": parsed})
+        parsed = ingredient_parser_service.parse_ingredients(ingredients)
+        return json_response(200, {"parsed": parsed, "count": len(parsed)})
     except Exception as e:
         logger.error("Parse failed", {"error": e})
-        return json_response(500, {"error": str(e)})
+        return json_response(500, {"error": str(e), "code": "PARSING_FAILED"})
 ```
 
 ## Service Pattern
